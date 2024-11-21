@@ -1,4 +1,4 @@
-name: Lint Go Code
+name: Build Go Code
 
 on:
   push:
@@ -6,21 +6,18 @@ on:
       - main
 
 jobs:
-  Hello:
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Hello World!
-        run: echo "Hello World, Go Away"
-
   golangci:
-    name: lint
-    runs-on: ubuntu-22.04
+    name: build
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
         with:
           go-version: stable
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v6
-        with:
-          version: v1.60
+
+      - name: Build binary
+        run: |
+          go build -o main .

@@ -1,11 +1,9 @@
-FROM golang:1.23-alpine
+FROM alpine
 
 RUN mkdir /app
 
-ADD . /app
+ADD main /app
 
 WORKDIR /app
 
-RUN go build -o main .
-
-CMD [ "/app/main" ]
+ENTRYPOINT ["/app/main"]

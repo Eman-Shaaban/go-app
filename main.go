@@ -12,6 +12,7 @@ func hello(w http.ResponseWriter, r *http.Request) {
 
 func handleRequests() {
 	http.HandleFunc("/", hello)
+	fmt.Println("Server started...")
 	log.Fatal(http.ListenAndServe(":3000", nil))
 }
 
